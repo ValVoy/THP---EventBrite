@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Salut <%= @user.first_name %> et bienvenue !</h1>
+    <p>
+      Tu t'es bien inscrit sur notre Eventbrite-like avec l'e-mail : <%= @user.email %>.
+    </p>
+    <p>
+      Pour te connecter, c'est par ici : <%= @url %>.
+    </p>
+  </body>
+</html>

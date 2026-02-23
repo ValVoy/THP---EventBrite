@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
+      /* CSS basique intégré directement (les clients mail n'aiment pas les CDN comme Bootstrap) */
+      body {
+        background-color: #212529; /* Fond sombre typique Bootstrap */
+        color: #f8f9fa; /* Texte clair */
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      .email-container {
+        background-color: #343a40;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      a {
+        color: #0d6efd; /* Bleu Bootstrap pour les liens */
+        text-decoration: none;
+      }
     </style>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="email-container">
+      <%= yield %>
+    </div>
   </body>
 </html>

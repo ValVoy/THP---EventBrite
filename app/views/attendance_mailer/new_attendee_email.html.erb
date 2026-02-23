@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Bonjour <%= @admin.first_name %>,</h1>
+    <p>
+      Excellente nouvelle : <strong><%= @attendee.first_name %> <%= @attendee.last_name %></strong> vient de s'inscrire à ton événement "<%= @event.title %>" !
+    </p>
+    <p>
+      Prépare-toi à l'accueillir !
+    </p>
+  </body>
+</html>

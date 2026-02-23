@@ -68,7 +68,9 @@ end
 gem 'dotenv-rails', groups: [:development, :test]
 
 group :development do
-  gem 'letter_opener'
+  gem 'letter_opener_web'
   gem 'better_errors'
   gem 'binding_of_caller' # Souvent requis pour que better_errors fonctionne de manière optimale
 end
+
+gem 'devise'
