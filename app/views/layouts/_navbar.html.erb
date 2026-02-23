@@ -1,47 +1,51 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+<%# Empêche les bugs de cache Turbo pour le menu %>
+<% content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-secondary py-3 sticky-top" style="z-index: 1060;">
   <div class="container">
-    <%= link_to "Eventbrite-Like", root_path, class: "navbar-brand fw-bold" %>
+    <%= link_to "EVENTBRITE-LIKE", root_path, class: "navbar-brand fw-bold text-white", style: "letter-spacing: 1px;" %>
     
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item">
-          <%= link_to "Accueil", root_path, class: "nav-link active" %>
-        </li>
 
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-2">
+        <li class="nav-item">
+          <%= link_to "Accueil", root_path, class: "nav-link text-secondary" %>
+        </li>
+        
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%# VRAI LIEN RAILS ICI %>
-            <%= link_to "Créer un événement", new_event_path, class: "nav-link text-warning" %>
+            <%= link_to "Créer un événement", new_event_path, class: "btn btn-outline-warning rounded-pill btn-sm px-3 fw-bold mx-2" %>
           </li>
           
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.first_name || current_user.email %>
+            <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.email %>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <%# VRAI LIEN RAILS ICI %>
-              <li><%= link_to "Mon profil", user_path(current_user.id), class: "dropdown-item" %></li>
-              <li><%= link_to "Éditer mon compte", edit_user_registration_path, class: "dropdown-item" %></li>
-              <li><hr class="dropdown-divider"></li>
-              <li>
-                <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item text-danger bg-transparent border-0 text-start w-100" %>
-              </li>
+            <%# Le style ici force le menu à passer devant tout le reste %>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-secondary" aria-labelledby="userDropdown" style="background: #161b22; z-index: 9999; position: absolute;">
+              <li><%= link_to "Mon profil", user_path(current_user), class: "dropdown-item text-white" %></li>
+              <li><hr class="dropdown-divider border-secondary"></li>
+              <li><%= button_to "Déconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" %></li>
             </ul>
           </li>
-
         <% else %>
-          <li class="nav-item">
-            <%= link_to "Se connecter", new_user_session_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-            <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-primary" %>
-          </li>
+          <li class="nav-item"><%= link_to "Connexion", new_user_session_path, class: "nav-link text-white" %></li>
+          <li class="nav-item"><%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-primary rounded-pill px-4 fw-bold" %></li>
         <% end %>
       </ul>
     </div>
   </div>
 </nav>
+
+<style>
+  /* Fix pour éviter que le menu soit caché par les cartes */
+  .dropdown-item:hover {
+    background-color: #0d1117;
+    color: #58a6ff !important;
+  }
+</style>

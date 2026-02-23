@@ -1,30 +1,33 @@
 <div class="container mt-5">
-  <div class="p-5 mb-4 bg-body-tertiary rounded-3 text-center shadow-sm">
-    <div class="container-fluid py-5">
-      <h1 class="display-5 fw-bold">Bienvenue sur Eventbrite-Like</h1>
-      <p class="col-md-8 mx-auto fs-4">Trouvez les meilleurs événements dans votre ville, ou proposez le vôtre à la communauté !</p>
-      <%= link_to "Créer un événement", new_event_path, class: "btn btn-primary btn-lg mt-3" %>
-    </div>
+  <div class="p-5 mb-5 rounded-5 shadow-lg text-center" style="background: linear-gradient(145deg, #0d1117 0%, #161b22 100%); border: 1px solid #30363d;">
+    <h1 class="display-3 fw-bold text-white mb-3">Découvrez. Participez. <span class="text-primary">Créez.</span></h1>
+    <p class="lead text-secondary mb-4 fs-4">La plateforme communautaire pour vos événements locaux.</p>
+    <%= link_to "Proposer un événement", new_event_path, class: "btn btn-primary btn-lg rounded-pill px-5 fw-bold", style: "background-color: #238636; border-color: #2ea043;" %>
   </div>
 
-  <h2 class="mb-4">Prochains événements</h2>
-  <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-white m-0">| Prochains événements</h2>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @events.each do |event| %>
       <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title fw-bold"><%= event.title %></h5>
-            <h6 class="card-subtitle mb-3 text-muted">
-              📅 <%= event.start_date.strftime("%d/%m/%Y à %H:%M") %>
-            </h6>
-            <p class="card-text"><%= truncate(event.description, length: 120) %></p>
-          </div>
-          <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
-            <span class="badge bg-success fs-6"><%= event.price %> €</span>
-            <%= link_to "Voir plus", event_path(event.id), class: "btn btn-sm btn-outline-primary" %>
+        <div class="card h-100 border-0 rounded-4 shadow-sm custom-card" style="background: #161b22; border: 1px solid #30363d !important;">
+          <div class="card-body p-4 text-center">
+            <h4 class="card-title fw-bold text-white mb-3"><%= event.title %></h4>
+            <p class="text-secondary small mb-4"><%= truncate(event.description, length: 100) %></p>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="text-success fw-bold"><%= event.price %> €</span>
+              <%= link_to "Détails", event_path(event), class: "btn btn-outline-primary rounded-pill px-4" %>
+            </div>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
+<style>
+  .custom-card { transition: all 0.3s ease; }
+  .custom-card:hover { transform: translateY(-8px); border-color: #58a6ff !important; box-shadow: 0 10px 20px rgba(0,0,0,0.4) !important; }
+</style>

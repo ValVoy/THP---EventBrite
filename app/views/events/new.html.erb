@@ -1,2 +1,44 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card border-0 rounded-4 shadow-lg overflow-hidden" style="background: #161b22; border: 1px solid #30363d !important;">
+        <div class="p-4 border-bottom border-secondary text-center" style="background: #0d1117;">
+          <h2 class="fw-bold text-white m-0">Nouvel Événement</h2>
+        </div>
+        <div class="card-body p-5">
+          <%= form_with model: @event, local: true do |f| %>
+            <div class="mb-4">
+              <%= f.label :title, "Titre", class: "form-label text-secondary small fw-bold" %>
+              <%= f.text_field :title, class: "form-control bg-dark text-white border-secondary p-3 shadow-none" %>
+            </div>
+            <div class="mb-4">
+              <%= f.label :description, "Description", class: "form-label text-secondary small fw-bold" %>
+              <%= f.text_area :description, class: "form-control bg-dark text-white border-secondary p-3 shadow-none", rows: 4 %>
+            </div>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <%= f.label :start_date, "Date et heure", class: "form-label text-secondary small fw-bold" %>
+                <%= f.datetime_field :start_date, class: "form-control bg-dark text-white border-secondary p-3 shadow-none" %>
+              </div>
+              <div class="col-md-6">
+                <%= f.label :duration, "Durée (min)", class: "form-label text-secondary small fw-bold" %>
+                <%= f.number_field :duration, class: "form-control bg-dark text-white border-secondary p-3 shadow-none" %>
+              </div>
+            </div>
+            <div class="row g-3 mb-5">
+              <div class="col-md-6">
+                <%= f.label :price, "Prix (€)", class: "form-label text-secondary small fw-bold" %>
+                <%= f.number_field :price, class: "form-control bg-dark text-white border-secondary p-3 shadow-none" %>
+              </div>
+              <div class="col-md-6">
+                <%= f.label :location, "Lieu", class: "form-label text-secondary small fw-bold" %>
+                <%= f.text_field :location, class: "form-control bg-dark text-white border-secondary p-3 shadow-none" %>
+              </div>
+            </div>
+            <%= f.submit "Publier l'événement", class: "btn btn-success btn-lg w-100 rounded-pill fw-bold py-3 shadow" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

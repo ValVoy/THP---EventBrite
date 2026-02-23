@@ -1,24 +1,16 @@
 class UsersController < ApplicationController
-  # 1. Devise vérifie que la personne est connectée
-  before_action :authenticate_user!, only: [:show]
-  # 2. Notre méthode personnalisée vérifie que c'est bien le bon profil
-  before_action :is_current_user?, only: [:show]
+  before_action :authenticate_user!
+  before_action :is_current_user?
 
   def show
     @user = User.find(params[:id])
-    # On récupère tous les événements dont cet utilisateur est l'administrateur
     @events = @user.administered_events
   end
 
   private
 
   def is_current_user?
-    # find_by ne fait pas planter l'app si l'ID n'existe pas
-    @user = User.find_by(id: params[:id]) 
-    
-    unless current_user == @user
-      flash[:alert] = "Accès refusé : vous ne pouvez voir que votre propre profil."
-      redirect_to root_path
-    end
+    @user = User.find_by(id: params[:id])
+    redirect_to root_path, alert: "Accès refusé" unless current_user == @user
   end
 end
