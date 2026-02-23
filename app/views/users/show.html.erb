@@ -1,2 +1,51 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container mt-5">
+  <div class="row">
+    
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h3 class="card-title fw-bold">
+            <%= @user.first_name || "Prénom inconnu" %> <%= @user.last_name %>
+          </h3>
+          <p class="text-muted"><%= @user.email %></p>
+          <hr>
+          <p class="card-text text-start">
+            <strong>Description :</strong><br>
+            <%= @user.description || "Aucune description pour le moment." %>
+          </p>
+          
+          <div class="d-grid mt-4">
+            <%= link_to "Éditer mon compte", edit_user_registration_path, class: "btn btn-outline-light mb-2" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h3 class="mb-4">Mes événements créés</h3>
+      
+      <% if @events.any? %>
+        <div class="list-group shadow-sm">
+          <% @events.each do |event| %>
+            <%= link_to event_path(event), class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-dark text-light border-secondary" do %>
+              <div>
+                <h5 class="mb-1 fw-bold"><%= event.title %></h5>
+                <small class="text-secondary">
+                  📅 <%= event.start_date.strftime("%d/%m/%Y à %H:%M") %>
+                </small>
+              </div>
+              <span class="badge bg-success rounded-pill"><%= event.price %> €</span>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-secondary text-center bg-dark text-light border-secondary" role="alert">
+          Vous n'avez pas encore créé d'événement.
+          <br>
+          <%= link_to "Créer mon premier événement", new_event_path, class: "btn btn-primary mt-3" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
