@@ -13,7 +13,9 @@ class UsersController < ApplicationController
   private
 
   def is_current_user?
-    @user = User.find(params[:id])
+    # find_by ne fait pas planter l'app si l'ID n'existe pas
+    @user = User.find_by(id: params[:id]) 
+    
     unless current_user == @user
       flash[:alert] = "Accès refusé : vous ne pouvez voir que votre propre profil."
       redirect_to root_path
