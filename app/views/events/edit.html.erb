@@ -1,0 +1,60 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden" style="background: #161b22; border: 1px solid #30363d !important;">
+        
+        <div class="p-4 border-bottom border-secondary bg-dark text-center">
+          <h1 class="text-white h3 mb-0">Modifier l'événement</h1>
+          <p class="text-secondary mb-0 small">Mettez à jour les informations de votre session</p>
+        </div>
+
+        <div class="card-body p-4 text-white">
+          <%= form_with(model: @event, local: true) do |f| %>
+            
+            <div class="mb-3">
+              <%= f.label :title, "Titre", class: "form-label text-secondary small" %>
+              <%= f.text_field :title, class: "form-control bg-dark text-white border-secondary" %>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <%= f.label :start_date, "Date de début", class: "form-label text-secondary small" %>
+                <%= f.datetime_local_field :start_date, class: "form-control bg-dark text-white border-secondary" %>
+              </div>
+              <div class="col-md-6 mb-3">
+                <%= f.label :duration, "Durée (en minutes)", class: "form-label text-secondary small" %>
+                <%= f.number_field :duration, step: 5, class: "form-control bg-dark text-white border-secondary" %>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :description, "Description", class: "form-label text-secondary small" %>
+              <%= f.text_area :description, rows: 5, class: "form-control bg-dark text-white border-secondary" %>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <%= f.label :price, "Prix (€)", class: "form-label text-secondary small" %>
+                <%= f.number_field :price, class: "form-control bg-dark text-white border-secondary" %>
+              </div>
+              <div class="col-md-6 mb-3">
+                <%= f.label :location, "Lieu", class: "form-label text-secondary small" %>
+                <%= f.text_field :location, class: "form-control bg-dark text-white border-secondary" %>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <%= f.submit "Mettre à jour l'événement", class: "btn btn-primary w-100 rounded-pill fw-bold py-2" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="text-center mt-3">
+        <%= link_to "Annuler", event_path(@event), class: "text-secondary small text-decoration-none" %>
+      </div>
+
+    </div>
+  </div>
+</div>
